@@ -1,12 +1,14 @@
 <?php
 namespace Services;
 
-use LaVuCRM\Repositories\Interfaces\ProductRepository;
+use Leroy\Repositories\Interfaces\ProductRepository;
 
-
-class RoleService
+class ProductService
 {
-    
+    /**
+     * 
+     * @var type 
+     */
     private $productRepository;
     
     public function __construct(ProductRepository $productRepository)
