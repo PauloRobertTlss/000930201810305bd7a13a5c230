@@ -32,10 +32,8 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
     */
     public function validator()
     {
-
         return ProductValidator::class;
     }
-
 
     /**
      * Boot up the repository, pushing criteria
