@@ -20,6 +20,9 @@ class Product extends Model implements Transformable
      *
      * @var array
      */
-    protected $fillable = [];
-
+    protected $fillable = ['id','lm','name','description','free_shipping','price','category_id'];
+    
+    public function category(){
+         return $this->belongsTo(Category::class,'category_id','id');
+    }
 }

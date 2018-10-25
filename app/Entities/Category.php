@@ -20,6 +20,10 @@ class Category extends Model implements Transformable
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = ['id','name','description'];
+    
+    public function products(){
+         return $this->hasMany(Product::class);
+    }
 
 }
