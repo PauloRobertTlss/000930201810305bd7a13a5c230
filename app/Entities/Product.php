@@ -22,6 +22,12 @@ class Product extends Model implements Transformable
      */
     protected $fillable = ['id','lm','name','description','free_shipping','price','category_id'];
     
+    
+    public function getPriceDisplay()
+    {
+        return sprintf('R$ %s', number_format($this->price, 2));
+    }
+    
     public function category(){
          return $this->belongsTo(Category::class,'category_id','id');
     }

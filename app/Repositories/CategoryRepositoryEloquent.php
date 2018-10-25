@@ -7,6 +7,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use Leroy\Repositories\Interfaces\CategoryRepository;
 use Leroy\Entities\Category;
 use Leroy\Validators\CategoryValidator;
+use Leroy\Presenters\CategoryPresenter;
 
 /**
  * Class CategoryRepositoryEloquent.
@@ -43,6 +44,10 @@ class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepos
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+    
+     public function presenter() {
+        return CategoryPresenter::class;
     }
     
 }

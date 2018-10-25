@@ -23,11 +23,9 @@ class CategoryTransformer extends TransformerAbstract
     {
         return [
             'id'         => (int) $model->id,
-
-            /* place your other model properties here */
-
-            'created_at' => $model->created_at,
-            'updated_at' => $model->updated_at
+            'name'         => (string) $model->name,
+            'description'         => (int) $model->description,
+            'created_at' => $model->created_at->format('Y-m-d'),           
         ];
-    }
+    } 
 }

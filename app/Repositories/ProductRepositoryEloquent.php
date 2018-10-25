@@ -7,6 +7,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use Leroy\Repositories\Interfaces\ProductRepository;
 use Leroy\Entities\Product;
 use Leroy\Validators\ProductValidator;
+use Leroy\Presenters\ProductPresenter;
 
 /**
  * Class ProductRepositoryEloquent.
@@ -43,4 +44,8 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
         $this->pushCriteria(app(RequestCriteria::class));
     }
     
+    
+    public function presenter() {
+        return ProductPresenter::class;
+    }
 }
