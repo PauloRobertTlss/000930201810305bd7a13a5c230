@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Leroy\Http\Controllers\Controller;
 use Leroy\Repositories\Interfaces\ProductRepository;
-use Services\ProductService;
+use Leroy\Services\ProductService;
 
 /**
  * Class ProductsController.
@@ -34,5 +34,22 @@ class ProductsController extends Controller
         return $this->repository->all();
     }
     
+    public function show($id){
+        return $this->repository->find($id);
+    }
+    
+    public function update($id, Request $request){
+       $data = $request->all();
+        return $this->service->update($id,$data);
+    }
+    
+    public function destroy($id){
+        return $this->repository->find($id);
+    }
+    
+    public function import(Request $request)
+    {
+        return $this->service->importExcel();
+    }
     
 }
