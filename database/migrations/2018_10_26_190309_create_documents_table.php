@@ -16,7 +16,12 @@ class CreateDocumentsTable extends Migration
 	public function up()
 	{
 		Schema::create('documents', function(Blueprint $table) {
-            $table->increments('id');
+                    $table->increments('id');
+                    $table->string('name',30);
+                    $table->string('path');
+                    $table->string('file_display',30);
+                    $table->string('hash_endpoing',30);
+                    $table->boolean('processed')->default(false);
 
             $table->timestamps();
 		});
