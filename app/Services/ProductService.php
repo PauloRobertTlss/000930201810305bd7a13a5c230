@@ -4,6 +4,7 @@ namespace Leroy\Services;
 use Leroy\Repositories\Interfaces\ProductRepository;
 use Leroy\Excel\Bot\Bot as BotExcel;
 use Illuminate\Http\UploadedFile;
+use Leroy\Jobs\RegisterProductsInBackgroud;
 
 class ProductService
 {
@@ -47,9 +48,10 @@ class ProductService
                return response()->json(['error'=>true,'message'=>'Planilha não formatada'],422);
          }
         
+         $job = (new RegisterProductsInBackgroud($collection->toArray()));
+         dispatch($job);
          
-         
-         return response()->json(['data'=>$collection->toArray()],200);
+         return response()->json(['message'=>'excel! success','rows' => $collection->count()],200);
         
         }
         
