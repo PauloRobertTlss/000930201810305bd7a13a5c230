@@ -23,16 +23,17 @@ class Document extends Model implements Transformable
      */
     protected $fillable = ['id','name','path','file_display','hash_endpoing','processed','progress'];
     
-    public function getProgressAttribute(){
+    public function getProgress(){
+        
         switch ($this->progress) {
             case 0:
-                return `Factivel`;
+                return "Factivel";
                 break;
             case 1:
-                return `Sucesso`;
+                return "Sucesso";
                 break;
             case 2:
-                return `Error no processamento`;
+                return "Error no processamento";
                 break;
         }
     }
