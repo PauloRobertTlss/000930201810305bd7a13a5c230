@@ -42,7 +42,9 @@ class RegisterProductsInBackgroud implements ShouldQueue
            
          } catch (\Box\Spout\Common\Exception\SpoutException $e){
                unlink($this->doc->path);
+               $this->delete();
               $progress=2;//error
+              $this->delete(); //remover trabalho da fila
          }
          
                $this->doc->processed = true;
