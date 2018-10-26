@@ -9,7 +9,9 @@ use Leroy\Jobs\RegisterProductsInBackgroud;
 use Leroy\Validators\ProductValidator;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-
+/**
+ * 
+ */
 class ProductService
 {
     /**
@@ -46,10 +48,8 @@ class ProductService
                 $data['category_id'] = !empty($category) ? $category->id : null;
                 
                 /**
-                 * Dependará da Regra de Négocio retornar
+                 * Dependará da Regra de Négocio quando a categoria não for encontrada. Retorna 404, ou continua?
                  * return response()->json(['status' => 'failed', 'data' => null, 'message' => 'Category not found'],404);
-                 *  
-                 * 
                  */
             }
           
