@@ -21,8 +21,24 @@ class Document extends Model implements Transformable
      *
      * @var array
      */
-    protected $fillable = ['id','name','path','file_display','hash_endpoing','processed'];
-
+    protected $fillable = ['id','name','path','file_display','hash_endpoing','processed','progress'];
+    
+    public function getProgressAttribute(){
+        switch ($this->progress) {
+            case 0:
+                return `Factivel`;
+                break;
+            case 1:
+                return `Sucesso`;
+                break;
+            case 2:
+                return `Error no processamento`;
+                break;
+        }
+    }
+        
+    
+    
     
     public function time_elapsed_string($full = false)
     {
