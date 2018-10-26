@@ -8,6 +8,7 @@ use Leroy\Http\Controllers\Controller;
 use Leroy\Repositories\Interfaces\ProductRepository;
 use Leroy\Services\ProductService;
 use Leroy\Http\Requests\ProductImportExcel;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 /**
  * Class ProductsController.
@@ -35,7 +36,12 @@ class ProductsController extends Controller
     }
     
     public function show($id){
-        return $this->repository->find($id);
+        try{
+            return $this->repository->find($id);
+        }catch(ModelNotFoundException $e)
+        {
+            return response()->json(['status' => 'failed', 'data' => null, 'message' => 'product not found'],404);
+        }
     }
     
     public function update($id, Request $request){
