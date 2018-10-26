@@ -50,6 +50,5 @@ class RegisterProductsInBackgroud implements ShouldQueue
                 $p = $checkCategory ? $p : array_except($p,'category_id');
                 $repository->create($p);
             }
-        
     }
 }

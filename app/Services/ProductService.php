@@ -57,7 +57,6 @@ class ProductService
          return response()->json(['message'=>'excel! success','rows' => $collection->count()],200);
         
         }
-        
         return response()->json(['error'=>true,'message'=>'Planilha não encontrada'],422);
         
     }
