@@ -89,23 +89,22 @@ class ProductService
         $file = $data["file"];
         if (is_a($file, UploadedFile::class) and $file->isValid()) {
         
-        $file_name_temp = bin2hex(openssl_random_pseudo_bytes(8)).'.'.$file->getClientOriginalExtension();
-        $file->move(sys_get_temp_dir(),$file_name_temp);
-        $tmpFile = sys_get_temp_dir().DIRECTORY_SEPARATOR.$file_name_temp;
+            $file_name_temp = bin2hex(openssl_random_pseudo_bytes(8)).'.'.$file->getClientOriginalExtension();
+            $file->move(sys_get_temp_dir(),$file_name_temp);
+            $tmpFile = sys_get_temp_dir().DIRECTORY_SEPARATOR.$file_name_temp;
         
-        \Log::info("movendo upload para pasta temporatia do sistema ".$tmpFile);
+            \Log::info("movendo upload para pasta temporatia do sistema ".$tmpFile);
         
          try{
-             /**
-              * Gerar uma coleção: Como regra de Negócio a planilha será carregada apenas uma vez e depois descartada. Queues aguarda um @array.
-              */
+           /**
+           * Gerar uma coleção: Como regra de Negócio(esboço) a planilha será carregada apenas uma vez e depois descartada. O Job aguarda um @array.
+           */
             $collection = (new BotExcel)->import($tmpFile);
          } catch (\Box\Spout\Common\Exception\SpoutException $e){
                unlink($tmpFile);
                return response()->json(['error'=>true,'message'=>'Planilha com erros'],422);
          }
          
-         unlink($tmpFile);
          if($collection->count()){
             $job = (new RegisterProductsInBackgroud($collection->toArray()));
             dispatch($job);
@@ -116,6 +115,4 @@ class ProductService
         return response()->json(['error'=>true,'message'=>'Planilha não encontrada'],422);
         
     }
-    
-
 }

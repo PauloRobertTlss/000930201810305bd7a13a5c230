@@ -12,15 +12,15 @@ class RegisterProductsInBackgroud implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public $products;
+    public $path_file_temp;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(array $data)
+    public function __construct(string $path)
     {
-        $this->products = $data;
+        $this->path_file_temp = $path;
     }
 
     /**

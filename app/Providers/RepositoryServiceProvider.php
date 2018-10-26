@@ -26,6 +26,7 @@ class RepositoryServiceProvider extends ServiceProvider
         
         $this->app->bind(\Leroy\Repositories\Interfaces\CategoryRepository::class, \Leroy\Repositories\CategoryRepositoryEloquent::class);
         $this->app->bind(\Leroy\Repositories\Interfaces\ProductRepository::class, \Leroy\Repositories\ProductRepositoryEloquent::class);
+        $this->app->bind(\Leroy\Repositories\Interfaces\DocumentRepository::class, \Leroy\Repositories\DocumentRepositoryEloquent::class);
         //:end-bindings:
     }
 }
