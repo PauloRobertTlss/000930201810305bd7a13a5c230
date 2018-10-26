@@ -3,7 +3,8 @@ namespace Leroy\Services;
 
 use Leroy\Repositories\Interfaces\ProductRepository;
 use Leroy\Repositories\Interfaces\CategoryRepository;
-use Leroy\Excel\Bot\Bot as BotExcel;
+use Leroy\Repositories\Interfaces\DocumentRepository;
+
 use Illuminate\Http\UploadedFile;
 use Leroy\Jobs\RegisterProductsInBackgroud;
 use Leroy\Validators\ProductValidator;
@@ -96,26 +97,15 @@ class ProductService
             $file->move(sys_get_temp_dir(),$file_name_temp);
             $tmpFile = sys_get_temp_dir().DIRECTORY_SEPARATOR.$file_name_temp;
             
-            \Log::info("movendo upload para pasta temporatia do sistema ".$tmpFile);
-            
-         try{
-           /**
-           * Gerar uma coleção: Como regra de Negócio(esboço) a planilha será carregada apenas uma vez e depois descartada. O Job aguarda um @array.
-           */
-            $collection = (new BotExcel)->import($tmpFile);
-         } catch (\Box\Spout\Common\Exception\SpoutException $e){
-               unlink($tmpFile);
-               return response()->json(['error'=>true,'message'=>'Planilha com erros'],422);
-         }
+            $hashEndPoint = bin2hex(openssl_random_pseudo_bytes(8)).".".$file->getClientOriginalExtension().".".bin2hex(openssl_random_pseudo_bytes(8));
+            $document = $this->documentRepository->create(['name'=>$file_name_temp,'path'=>$tmpFile,'file_display'=>$file->getClientOriginalName(),'hash_endpoing'=>$hashEndPoint]);
+             
+            //$job = (new RegisterProductsInBackgroud($document));
+            //dispatch($job);
          
-         if($collection->count()){
-            $job = (new RegisterProductsInBackgroud($collection->toArray()));
-            dispatch($job);
-         }
-         return response()->json(['message'=>'excel! success','rows' => $collection->count()],200);
+         return response()->json(['message'=>'excel! success','endpoint' => url('webhook/processed',[$hashEndPoint])],200);
         
         }
         return response()->json(['error'=>true,'message'=>'Planilha não encontrada'],422);
-        
     }
 }
