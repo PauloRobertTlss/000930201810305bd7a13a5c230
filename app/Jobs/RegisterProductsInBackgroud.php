@@ -34,22 +34,20 @@ class RegisterProductsInBackgroud implements ShouldQueue
     
     public function handle()
     {
-        
          try{
-           
            $collections = (new BotExcel)->import($this->doc->path);
            $this->products = $collections->toArray();
            unset($collections);
-               $this->doc->processed = true;
-               $this->doc->progress = 1;
-               $this->doc->save();
+              $progress=1;//success
            
          } catch (\Box\Spout\Common\Exception\SpoutException $e){
                unlink($this->doc->path);
-               $this->doc->processed = true;
-               $this->doc->progress = 2;
-               $this->doc->save();
+              $progress=2;//error
          }
+         
+               $this->doc->processed = true;
+               $this->doc->progress = $progress;
+               $this->doc->save();
          
          if(count($this->products)){
             \Log::info("cadatro de produtos em background");
