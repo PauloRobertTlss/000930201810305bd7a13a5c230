@@ -49,6 +49,14 @@ class ProductService
     
     public function destroy(int $id){
         
+        try{
+          $this->productRepository->delete($id);
+        }
+        catch (ModelNotFoundException $e){
+            return response()->json(['status' => 'failed', 'data' => null, 'message' => 'Product not found'],404);
+        }
+        
+        return response()->json(['status' => 'success', 'data' => null, 'message' => 'Product deleted'],201);
         
     }
     
