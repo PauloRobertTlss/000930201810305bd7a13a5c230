@@ -38,7 +38,7 @@ class Document extends Model implements Transformable
         }
     }
         
-    public function time_elapsed_string($full = false)
+    public function timeElapsedString($full = false)
     {
         $now = Carbon::now('America/Sao_Paulo'); //Your timezone
         $ago = Carbon::createFromTimeStamp(strtotime($this->updated_at));
