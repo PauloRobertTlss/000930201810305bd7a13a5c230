@@ -32,11 +32,24 @@ class RegisterProductsInBackgroud implements ShouldQueue
     {
         \Log::info("cadatro de produtos");
         $repository = app(\Leroy\Repositories\Interfaces\ProductRepository::class);
+        $repositoryCategory = app(\Leroy\Repositories\Interfaces\CategoryRepository::class);
         $repository->skipPresenter(true);
+        $repositoryCategory->skipPresenter(true);
+        $checkCategory=false;
         
-        foreach ($this->products as $p){
-            $repository->create($p);
+        $first_product = array_first($this->products);
+        if(isset($first_product['category_id'])){
+            $category = $repositoryCategory->findByField('id',$first_product['category_id'])->first();
+            $checkCategory = !empty($category);
         }
+        
+        \Log::info("category de produtos [".$first_product['category_id']."] [".$checkCategory."]");
+        
+            foreach ($this->products as $p){
+                $p = $checkCategory ? $p : array_except($p,'category_id');
+                //\Log::info("create produto [". json_encode($p)."]");
+                $repository->create($p);
+            }
         
     }
 }
