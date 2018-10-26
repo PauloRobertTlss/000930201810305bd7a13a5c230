@@ -19,11 +19,11 @@ class CreateDocumentsTable extends Migration
                     $table->increments('id');
                     $table->string('name',30);
                     $table->string('path');
-                    $table->string('file_display',30);
-                    $table->string('hash_endpoing',30);
+                    $table->string('file_display',90);
+                    $table->string('hash_endpoing',90);
                     $table->boolean('processed')->default(false);
 
-            $table->timestamps();
+                    $table->timestamps();
 		});
 	}
 
