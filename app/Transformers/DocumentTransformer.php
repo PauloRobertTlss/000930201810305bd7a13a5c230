@@ -23,7 +23,7 @@ class DocumentTransformer extends TransformerAbstract
     {
         $result = [
             'processed' => (bool)$doc->processed,
-            'name' => (string)$doc->name
+            'name' => (string)$doc->file_display
             
         ];
         
