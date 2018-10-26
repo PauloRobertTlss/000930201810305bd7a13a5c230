@@ -1,6 +1,6 @@
 <?php
 
-namespace Excel\Bot;
+namespace Leroy\Excel\Bot;
 
 use Box\Spout\Reader\ReaderFactory;
 use Box\Spout\Reader\SheetInterface;
@@ -18,7 +18,8 @@ trait Importable
      * @var int
      */
     private $sheet_current = 1;
-
+    
+    
     /**
      * @param string $path
      *
@@ -116,11 +117,11 @@ trait Importable
             foreach ($sheet->getRowIterator() as $k => $row) {
                 
                 if (count($row)==0){
-                  continue;
+                  continue; //jump row empty
                 }
              
-                if ($k == 1) {
-                    $header_master = $row; //category first params
+                if (count($header_master) == 0) {
+                    $header_master = $row; //category target address A1:B1 row first params
                     continue;
                 }
                 
@@ -137,7 +138,8 @@ trait Importable
                 }
                 
                 $row = $callback ? $callback(array_combine($headers, $row)) : array_combine($headers, $row);
-                $collection[] = array_merge($row,['category'=>$header_master]);
+                
+                $collection[] = is_numeric($header_master[1]) ? array_prepend($row,$header_master[1],'category_id') : array_prepend($row,null,'category_id');
             }
         } else {
             foreach ($sheet->getRowIterator() as $row) {

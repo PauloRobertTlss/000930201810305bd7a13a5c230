@@ -24,7 +24,7 @@ class ProductImportExcel extends FormRequest
     public function rules()
     {
         return [
-             'file' =>'required|file'
+             'file' =>'required|file|mimes:csv,xlsx'
         ];
     }
 }
