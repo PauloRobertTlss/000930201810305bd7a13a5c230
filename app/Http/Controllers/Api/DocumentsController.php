@@ -20,8 +20,9 @@ class DocumentsController extends Controller
        $this->repository = $repository;
     }
     
-    public function processed(string $hash){
-        dd($hash);
+    public function processed(string $hash)
+    {
+        return $this->repository->findByField('hash_endpoing', $hash);   
     }
     
 }
