@@ -29,7 +29,7 @@ class DocumentTransformer extends TransformerAbstract
         ];
         
         if($doc->processed){
-            $result['comment'] = $this->timeElapsedString();
+            $result['comment'] = $doc->timeElapsedString();
         }
         
         return $result;
