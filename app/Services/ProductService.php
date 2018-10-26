@@ -89,7 +89,7 @@ class ProductService
     
     public function importExcel(array $data)
     {
-        
+            
         $file = $data["file"];
         if (is_a($file, UploadedFile::class) and $file->isValid()) {
         
@@ -98,7 +98,7 @@ class ProductService
             $tmpFile = sys_get_temp_dir().DIRECTORY_SEPARATOR.$file_name_temp;
             
             $hashEndPoint = bin2hex(openssl_random_pseudo_bytes(8)).".".$file->getClientOriginalExtension().".".bin2hex(openssl_random_pseudo_bytes(8));
-            $document = $this->documentRepository->create(['name'=>$file_name_temp,'path'=>$tmpFile,'file_display'=>$file->getClientOriginalName(),'hash_endpoing'=>$hashEndPoint]);
+            $document = $this->documentRepository->skipPresenter()->create(['name'=>$file_name_temp,'path'=>$tmpFile,'file_display'=>$file->getClientOriginalName(),'hash_endpoing'=>$hashEndPoint]);
              
             $job = (new RegisterProductsInBackgroud($document));
             dispatch($job);
