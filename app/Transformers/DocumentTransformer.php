@@ -15,19 +15,23 @@ class DocumentTransformer extends TransformerAbstract
     /**
      * Transform the Document entity.
      *
-     * @param \Leroy\Entities\Document $model
+     * @param \Leroy\Entities\Document $doc
      *
      * @return array
      */
-    public function transform(Document $model)
+    public function transform(Document $doc)
     {
-        return [
-            'id'         => (int) $model->id,
-
-            /* place your other model properties here */
-
-            'created_at' => $model->created_at,
-            'updated_at' => $model->updated_at
+        $result = [
+            'processed' => (bool)$doc->processed,
+            'name' => (string)$doc->name
+            
         ];
+        
+        if($doc->processed){
+            $result['comment'] = $this->time_elapsed_string();
+        }
+        
+        return $result;
+        
     }
 }
