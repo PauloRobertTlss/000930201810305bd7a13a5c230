@@ -24,16 +24,19 @@ class ProductService
      * @var type 
      */
     private $productRepository;
+    private $documentRepository;
     private $categoryRepository;
     private $productValidator;
     
-    public function __construct(ProductRepository $productRepository,ProductValidator $validator,CategoryRepository $categoryRepository)
+    public function __construct(ProductRepository $productRepository,ProductValidator $validator,CategoryRepository $categoryRepository,DocumentRepository $documentRepository)
     {
         $this->productValidator = $validator;
+        $this->documentRepository = $documentRepository;
         $this->productRepository = $productRepository;
         $this->categoryRepository = $categoryRepository;
         $this->productRepository->skipPresenter(true);
         $this->categoryRepository->skipPresenter(true);
+        $this->productRepository->skipPresenter(true);
     }
     
     public function update(array $data,int $id){
@@ -92,9 +95,9 @@ class ProductService
             $file_name_temp = bin2hex(openssl_random_pseudo_bytes(8)).'.'.$file->getClientOriginalExtension();
             $file->move(sys_get_temp_dir(),$file_name_temp);
             $tmpFile = sys_get_temp_dir().DIRECTORY_SEPARATOR.$file_name_temp;
-        
+            
             \Log::info("movendo upload para pasta temporatia do sistema ".$tmpFile);
-        
+            
          try{
            /**
            * Gerar uma coleção: Como regra de Negócio(esboço) a planilha será carregada apenas uma vez e depois descartada. O Job aguarda um @array.

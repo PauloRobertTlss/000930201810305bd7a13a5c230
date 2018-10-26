@@ -20,6 +20,6 @@ class Document extends Model implements Transformable
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = ['id','name','path','file_display','hash_endpoing','processed'];
 
 }
