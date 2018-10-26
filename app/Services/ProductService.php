@@ -103,7 +103,7 @@ class ProductService
             //$job = (new RegisterProductsInBackgroud($document));
             //dispatch($job);
          
-         return response()->json(['message'=>'excel! success','endpoint' => url('webhook/processed',[$hashEndPoint])],200);
+         return response()->json(['message'=>'excel! success','endpoint' => url('api/webhook/processed',[$hashEndPoint])],200);
         
         }
         return response()->json(['error'=>true,'message'=>'Planilha não encontrada'],422);
