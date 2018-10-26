@@ -3,7 +3,9 @@
 
 Route::group(['middleware'=>'cors'], function (){
     
-    Route::get('webhook/processed/{hash}','Api\DocumentsController@processed');
+    Route::get('webhook/processed/{hash}','Api\DocumentsController@show');
+    Route::get('webhook/inProgress','Api\DocumentsController@inProgress');
+    Route::get('webhook/processed','Api\DocumentsController@processed');
     
     Route::prefix('v1')
         ->namespace('Api\V1')
