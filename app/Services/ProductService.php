@@ -5,6 +5,8 @@ use Leroy\Repositories\Interfaces\ProductRepository;
 use Leroy\Excel\Bot\Bot as BotExcel;
 use Illuminate\Http\UploadedFile;
 use Leroy\Jobs\RegisterProductsInBackgroud;
+use Leroy\Validators\ProductValidator;
+use Prettus\Validator\Exceptions\ValidatorException;
 
 class ProductService
 {
@@ -13,16 +15,30 @@ class ProductService
      * @var type 
      */
     private $productRepository;
+    private $productValidator;
     
-    public function __construct(ProductRepository $productRepository)
+    public function __construct(ProductRepository $productRepository,ProductValidator $validator)
     {
+        $this->productValidator = $validator;
         $this->productRepository = $productRepository;
         $this->productRepository->skipPresenter(true);
     }
     
-    public function update(int $id,array $data){
+    public function update(array $data,int $id){
         
+        try{
+            
+             $this->productValidator->with($data)->passesOrFail(ProductValidator::RULE_UPDATE);
+        }
+        catch (ValidatorException $e){
+           $data = [
+                    'error' => true,
+                    'message' => $e->getMessageBag()
+                ];
+                return response()->json($data,400);
+            }
         
+        return $this->productRepository->update($data,$id);
     }
     
     public function destroy(int $id){

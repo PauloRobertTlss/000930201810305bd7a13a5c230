@@ -40,13 +40,13 @@ class ProductsController extends Controller
             return $this->repository->find($id);
         }catch(ModelNotFoundException $e)
         {
-            return response()->json(['status' => 'failed', 'data' => null, 'message' => 'product not found'],404);
+            return response()->json(['status' => 'failed', 'data' => null, 'message' => 'Product not found'],404);
         }
     }
     
-    public function update($id, Request $request){
+    public function update(Request $request,$id){
        $data = $request->all();
-        return $this->service->update($id,$data);
+        return $this->services->update($data,$id);
     }
     
     public function destroy($id){

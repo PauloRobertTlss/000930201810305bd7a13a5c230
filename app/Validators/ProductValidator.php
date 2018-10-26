@@ -12,6 +12,13 @@ use \Prettus\Validator\LaravelValidator;
  */
 class ProductValidator extends LaravelValidator
 {
+    
+    protected $messages = [
+        'name.required' => 'O name é obrigatório',
+        'description.required' => 'Uma descrição é obrigatório',
+        'price.required' => 'O preço é obrigatório',
+        'name.min' => 'minímo para name 10 caracteres'
+    ];
     /**
      * Validation Rules
      *
@@ -19,12 +26,12 @@ class ProductValidator extends LaravelValidator
      */
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-            'name' => 'required',
+            'name' => 'required|min:10',
             'price'  => 'required',
             'description'=> 'required'
         ],
         ValidatorInterface::RULE_UPDATE => [
-            'name' => 'required',
+            'name' => 'required|min:10',
             'price'  => 'required',
             'description'=> 'required'
         ],
