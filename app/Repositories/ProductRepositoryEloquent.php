@@ -11,7 +11,8 @@ use Leroy\Presenters\ProductPresenter;
 
 /**
  * Class ProductRepositoryEloquent.
- *
+ * Using Repository Pattern
+ * 
  * @package namespace Leroy\Repositories;
  */
 class ProductRepositoryEloquent extends BaseRepository implements ProductRepository

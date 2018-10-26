@@ -9,8 +9,13 @@ use Leroy\Jobs\RegisterProductsInBackgroud;
 use Leroy\Validators\ProductValidator;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+
 /**
+ * Class ProductService.
  * 
+ * Service Layer: Centralização das regras de negócio da aplicação.
+ *
+ * @package namespace Leroy\Services;
  */
 class ProductService
 {
@@ -91,6 +96,9 @@ class ProductService
         \Log::info("movendo upload para pasta temporatia do sistema ".$tmpFile);
         
          try{
+             /**
+              * Gerar uma coleção: Como regra de Negócio a planilha será carregada apenas uma vez e depois descartada. Queues aguarda um @array.
+              */
             $collection = (new BotExcel)->import($tmpFile);
          } catch (\Box\Spout\Common\Exception\SpoutException $e){
                unlink($tmpFile);

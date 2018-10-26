@@ -11,7 +11,7 @@ use Leroy\Presenters\CategoryPresenter;
 
 /**
  * Class CategoryRepositoryEloquent.
- *
+ * Using Repository Pattern
  * @package namespace Leroy\Repositories;
  */
 class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepository
@@ -19,7 +19,7 @@ class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepos
     /**
      * Specify Model class name
      *
-     * @return string
+     * @return strings
      */
     public function model()
     {
