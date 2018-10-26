@@ -100,10 +100,10 @@ class ProductService
             $hashEndPoint = bin2hex(openssl_random_pseudo_bytes(8)).".".$file->getClientOriginalExtension().".".bin2hex(openssl_random_pseudo_bytes(8));
             $document = $this->documentRepository->create(['name'=>$file_name_temp,'path'=>$tmpFile,'file_display'=>$file->getClientOriginalName(),'hash_endpoing'=>$hashEndPoint]);
              
-            //$job = (new RegisterProductsInBackgroud($document));
-            //dispatch($job);
+            $job = (new RegisterProductsInBackgroud($document));
+            dispatch($job);
          
-         return response()->json(['message'=>'excel! success','endpoint' => url('api/webhook/processed',[$hashEndPoint])],200);
+         return response()->json(['message'=>'document dispatch','endpoint' => url('api/webhook/processed',[$hashEndPoint])],200);
         
         }
         return response()->json(['error'=>true,'message'=>'Planilha não encontrada'],422);
