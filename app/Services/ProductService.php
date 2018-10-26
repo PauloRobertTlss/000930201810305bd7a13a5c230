@@ -47,7 +47,7 @@ class ProductService
         return response()->json(['status' => 'success', 'message' => 'Product updated'],200);
     }
     
-    public function destroy(int $id){
+    public function delete(int $id){
         
         try{
           $this->productRepository->delete($id);
@@ -56,7 +56,7 @@ class ProductService
             return response()->json(['status' => 'failed', 'data' => null, 'message' => 'Product not found'],404);
         }
         
-        return response()->json(['status' => 'success', 'data' => null, 'message' => 'Product deleted'],201);
+        return response()->json(['status' => 'success', 'data' => null, 'message' => 'Product deleted'],204);
         
     }
     

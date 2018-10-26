@@ -31,8 +31,9 @@ class ProductsController extends Controller
     }
     
     public function index(Request $request){
+        $limitTo = $request->query->get('limit',50);
         $this->repository->pushCriteria(app(RequestCriteria::class));
-        return $this->repository->all();
+        return $this->repository->paginate($limitTo);
     }
     
     public function show($id){
@@ -50,7 +51,7 @@ class ProductsController extends Controller
     }
     
     public function destroy($id){
-        return $this->services->destroy($id);
+        return $this->services->delete($id);
     }
     
     /**
