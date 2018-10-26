@@ -45,14 +45,15 @@ class ProductService
          try{
             $collection = (new BotExcel)->import($tmpFile);
          } catch (\Box\Spout\Common\Exception\SpoutException $e){
-               return response()->json(['error'=>true,'message'=>'Planilha não formatada'],422);
+               unlink($tmpFile);
+               return response()->json(['error'=>true,'message'=>'Planilha com erros'],422);
          }
          
+         unlink($tmpFile);
          if($collection->count()){
             $job = (new RegisterProductsInBackgroud($collection->toArray()));
             dispatch($job);
          }
-         
          return response()->json(['message'=>'excel! success','rows' => $collection->count()],200);
         
         }
