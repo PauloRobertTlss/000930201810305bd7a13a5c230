@@ -6,7 +6,7 @@ use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Leroy\Repositories\Interfaces\DocumentRepository;
 use Leroy\Entities\Document;
-use Leroy\Validators\DocumentValidator;
+use Leroy\Presenters\DocumentPresenter;
 
 /**
  * Class DocumentRepositoryEloquent.
@@ -33,6 +33,10 @@ class DocumentRepositoryEloquent extends BaseRepository implements DocumentRepos
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+    
+    public function presenter() {
+        return DocumentPresenter::class;
     }
     
 }
