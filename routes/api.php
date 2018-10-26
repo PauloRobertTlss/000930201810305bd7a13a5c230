@@ -17,7 +17,7 @@ Route::group(['middleware'=>'cors'], function (){
             Route::post('/import','ProductsController@import');
             
         });
-        Route::resource('products', 'ProductsController',['except' => ['edit', 'create','delete']]);
+        Route::resource('products', 'ProductsController',['except' => ['edit', 'create','delete','store']]);
             
         
         });
