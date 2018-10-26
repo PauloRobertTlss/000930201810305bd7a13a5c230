@@ -37,19 +37,11 @@ class Document extends Model implements Transformable
         }
     }
         
-    
-    
-    
     public function time_elapsed_string($full = false)
     {
-
         $now = Carbon::now('America/Sao_Paulo'); //Your timezone
         $ago = Carbon::createFromTimeStamp(strtotime($this->updated_at));
-
         $diff = $now->diff(new \DateTime($ago));
-
-        //return $diff;
-
         $diff->w = floor($diff->d / 7);
         $diff->d -= $diff->w * 7;
 
