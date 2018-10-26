@@ -25,7 +25,7 @@ class DocumentsController extends Controller
         return $this->repository->findByField('hash_endpoing', $hash);   
     }
     
-    public function pendents()
+    public function inProgress()
     {
         $this->repository->pushCriteria(new DocumentInProcessedCriteria(false));
         return $this->repository->all();
