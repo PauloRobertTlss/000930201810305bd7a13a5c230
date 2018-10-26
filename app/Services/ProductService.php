@@ -27,7 +27,7 @@ class ProductService
         
     }
     
-    public function importExcel(int $id){
+    public function importExcel(array $data){
         
         
     }

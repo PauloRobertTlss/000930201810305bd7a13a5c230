@@ -14,9 +14,7 @@ return [
    
     'supportsCredentials' => false,
     'allowedOrigins' => ['http://127.0.0.1:8000',
-                         'http://localhost:8000',
-                         'http://localhost:9527',
-                         'ip-10-0-1-92.sa-east-1.compute.internal'
+                         'http://localhost:8000'
                          ],
     'allowedOriginsPatterns' => [],
     'allowedHeaders' => ['*'],

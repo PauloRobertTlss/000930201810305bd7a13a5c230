@@ -9,11 +9,11 @@ Route::group(['middleware'=>'cors'], function (){
         /**
          * Produtos
         */
-        Route::group(['prefix' => 'procudts'], function () {
+        Route::group(['prefix' => 'products'], function () {
             Route::post('/import','ProductsController@import');
             
         });
-        Route::resource('products', 'ProductsController',['except' => ['edit', 'create','show']]);
+        Route::resource('products', 'ProductsController',['except' => ['edit', 'create','delete']]);
             
         
         });
