@@ -7,6 +7,7 @@ use Illuminate\Http\UploadedFile;
 use Leroy\Jobs\RegisterProductsInBackgroud;
 use Leroy\Validators\ProductValidator;
 use Prettus\Validator\Exceptions\ValidatorException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ProductService
 {
@@ -27,18 +28,23 @@ class ProductService
     public function update(array $data,int $id){
         
         try{
-            
-             $this->productValidator->with($data)->passesOrFail(ProductValidator::RULE_UPDATE);
+          $this->productValidator->with($data)->passesOrFail(ProductValidator::RULE_UPDATE);
         }
         catch (ValidatorException $e){
-           $data = [
-                    'error' => true,
-                    'message' => $e->getMessageBag()
-                ];
-                return response()->json($data,400);
-            }
+        $data = [
+                 'error' => true,
+                 'message' => $e->getMessageBag()
+         ];
+             return response()->json($data,400);
+         }
+        try{
+          $this->productRepository->update($data,$id);
+        }
+        catch (ModelNotFoundException $e){
+            return response()->json(['status' => 'failed', 'data' => null, 'message' => 'Product not found'],404);
+        }
         
-        return $this->productRepository->update($data,$id);
+        return response()->json(['status' => 'success', 'message' => 'Product updated'],200);
     }
     
     public function destroy(int $id){
