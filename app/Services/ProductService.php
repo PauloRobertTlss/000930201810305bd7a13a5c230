@@ -2,6 +2,7 @@
 namespace Leroy\Services;
 
 use Leroy\Repositories\Interfaces\ProductRepository;
+use Leroy\Repositories\Interfaces\CategoryRepository;
 use Leroy\Excel\Bot\Bot as BotExcel;
 use Illuminate\Http\UploadedFile;
 use Leroy\Jobs\RegisterProductsInBackgroud;
@@ -16,13 +17,16 @@ class ProductService
      * @var type 
      */
     private $productRepository;
+    private $categoryRepository;
     private $productValidator;
     
-    public function __construct(ProductRepository $productRepository,ProductValidator $validator)
+    public function __construct(ProductRepository $productRepository,ProductValidator $validator,CategoryRepository $categoryRepository)
     {
         $this->productValidator = $validator;
         $this->productRepository = $productRepository;
+        $this->categoryRepository = $categoryRepository;
         $this->productRepository->skipPresenter(true);
+        $this->categoryRepository->skipPresenter(true);
     }
     
     public function update(array $data,int $id){
@@ -31,13 +35,27 @@ class ProductService
           $this->productValidator->with($data)->passesOrFail(ProductValidator::RULE_UPDATE);
         }
         catch (ValidatorException $e){
-        $data = [
-                 'error' => true,
-                 'message' => $e->getMessageBag()
-         ];
+        $data = ['status' => 'failed','error' => true,'message' => $e->getMessageBag()];
              return response()->json($data,400);
          }
+         
         try{
+            
+            if(isset($data['category_id'])){
+                $category = $this->categoryRepository->findByField('id',$data['category_id'])->first();
+                $data['category_id'] = !empty($category) ? $category->id : null;
+                
+                /**
+                 * Dependará da Regra de Négocio retornar
+                 * return response()->json(['status' => 'failed', 'data' => null, 'message' => 'Category not found'],404);
+                 *  
+                 * 
+                 */
+            }
+          
+          $data['price'] = str_replace(',','.', $data['price']);
+            
+          
           $this->productRepository->update($data,$id);
         }
         catch (ModelNotFoundException $e){
