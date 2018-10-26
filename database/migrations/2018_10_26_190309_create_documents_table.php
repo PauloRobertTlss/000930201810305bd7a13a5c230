@@ -22,7 +22,7 @@ class CreateDocumentsTable extends Migration
                     $table->string('file_display',90);
                     $table->string('hash_endpoing',90);
                     $table->boolean('processed')->default(false);
-                    $table->unsignedSmallInteger('progress')->default(0); //0 - factivel - 1 - sucesso - 2 - error
+                    $table->unsignedSmallInteger('progress')->default(0); //0 - factivel - 1 - sucesso - 2 - error no documento
 
                     $table->timestamps();
 		});
