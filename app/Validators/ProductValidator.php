@@ -26,7 +26,7 @@ class ProductValidator extends LaravelValidator
      */
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-            'name' => 'required|min:10',
+            'name' => 'required|min:5',
             'price'  => 'required',
             'description'=> 'required'
         ],
