@@ -35,6 +35,9 @@ class ProductTransformer extends TransformerAbstract
     }
     
      public function includeCategory(Product $product){
-        return $this->item($product->category, new CategoryTransformer());
+         if($product->category_id !== null){
+            return $this->item($product->category, new CategoryTransformer());
+         }
+         return null;
     }
 }

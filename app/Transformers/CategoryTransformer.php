@@ -27,5 +27,5 @@ class CategoryTransformer extends TransformerAbstract
             'description'         => (int) $model->description,
             'created_at' => $model->created_at->format('Y-m-d'),           
         ];
-    } 
+    }
 }
