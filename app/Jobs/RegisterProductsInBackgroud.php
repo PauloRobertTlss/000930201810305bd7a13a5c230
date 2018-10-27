@@ -9,6 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Leroy\Excel\Bot\Bot as BotExcel;
 use Leroy\Entities\Document;
+use Prettus\Validator\Exceptions\ValidatorException;
 
 class RegisterProductsInBackgroud implements ShouldQueue
 {
@@ -41,15 +42,14 @@ class RegisterProductsInBackgroud implements ShouldQueue
               $progress=1;//success
            
          } catch (\Box\Spout\Common\Exception\SpoutException $e){
-               unlink($this->doc->path);
                $this->delete();
               $progress=2;//error
               $this->delete(); //remover trabalho da fila
          }
-         
-               $this->doc->processed = true;
-               $this->doc->progress = $progress;
-               $this->doc->save();
+              unlink($this->doc->path);
+              $this->doc->processed = true;
+              $this->doc->progress = $progress;
+              $this->doc->save();
          
          if(count($this->products)){
             \Log::info("cadatro de produtos em background");
@@ -69,7 +69,11 @@ class RegisterProductsInBackgroud implements ShouldQueue
             unset($first_product);
                 foreach ($this->products as $p){
                     $p = $checkCategory ? $p : array_except($p,'category_id');
-                    $repository->create($p);
+                    try{
+                        $repository->create($p);
+                    }catch(ValidatorException $e){
+                        continue;
+                    }
                 }
         }
     }
