@@ -42,7 +42,6 @@ class RegisterProductsInBackgroud implements ShouldQueue
               $progress=1;//success
            
          } catch (\Box\Spout\Common\Exception\SpoutException $e){
-               $this->delete();
               $progress=2;//error
               $this->delete(); //remover trabalho da fila
          }
