@@ -11,14 +11,12 @@ Route::group(['middleware'=>'cors'], function (){
         ->namespace('Api\V1')
         ->group(function () {
         /**
-         * Produtos
+        * Produtos
         */
         Route::group(['prefix' => 'products'], function () {
             Route::post('/import','ProductsController@import');
-            
         });
         Route::resource('products', 'ProductsController',['except' => ['edit', 'create','delete','store']]);
             
-        
         });
 });
