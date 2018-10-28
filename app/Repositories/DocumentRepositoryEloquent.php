@@ -15,6 +15,7 @@ use Leroy\Presenters\DocumentPresenter;
  */
 class DocumentRepositoryEloquent extends BaseRepository implements DocumentRepository
 {
+    
     /**
      * Specify Model class name
      *
@@ -25,8 +26,6 @@ class DocumentRepositoryEloquent extends BaseRepository implements DocumentRepos
         return Document::class;
     }
 
-    
-
     /**
      * Boot up the repository, pushing criteria
      */
@@ -35,6 +34,11 @@ class DocumentRepositoryEloquent extends BaseRepository implements DocumentRepos
         $this->pushCriteria(app(RequestCriteria::class));
     }
     
+    /**
+     * Presentation
+     * Responsible for the default presentation layer of the repository
+     * @return type
+     */
     public function presenter() {
         return DocumentPresenter::class;
     }
