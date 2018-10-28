@@ -16,6 +16,7 @@ Route::group(['middleware'=>'cors'], function (){
         Route::group(['prefix' => 'products'], function () {
             Route::post('/import','ProductsController@import');
         });
+        
         Route::resource('products', 'ProductsController',['except' => ['edit', 'create','delete','store']]);
             
         });
