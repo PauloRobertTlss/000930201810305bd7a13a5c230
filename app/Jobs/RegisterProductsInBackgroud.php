@@ -51,7 +51,7 @@ class RegisterProductsInBackgroud implements ShouldQueue
               $this->doc->save();
          
          if(count($this->products)){
-            \Log::info("cadatro de produtos em background");
+            \Log::info("cadastro de produtos em background");
             $repository = app(\Leroy\Repositories\Interfaces\ProductRepository::class);
             $repositoryCategory = app(\Leroy\Repositories\Interfaces\CategoryRepository::class);
             $repository->skipPresenter(true);
@@ -69,8 +69,11 @@ class RegisterProductsInBackgroud implements ShouldQueue
                 foreach ($this->products as $p){
                     $p = $checkCategory ? $p : array_except($p,'category_id');
                     try{
-                        $repository->create($p);
+                        
+                        //If the model already exists in the database we can just update our record.
+                        $repository->updateOrCreate(array_only($p,['lm']),array_except($p,['lm']));
                     }catch(ValidatorException $e){
+                        
                         continue;
                     }
                 }
