@@ -25,6 +25,7 @@ class ProductTransformer extends TransformerAbstract
     {
         return [
             'id'         => (int) $product->id,
+            'lm'         =>  $product->lm,
             'name'         => (string) $product->name,
             'description'       => (string) $product->description,
             'free_shipping'     => (int) $product->free_shipping,
