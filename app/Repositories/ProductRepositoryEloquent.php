@@ -18,6 +18,12 @@ use Leroy\Presenters\ProductPresenter;
 class ProductRepositoryEloquent extends BaseRepository implements ProductRepository
 {
     /**
+     * Provided Worksheet Suggests that the primary key of the template is.
+     * 
+     */
+    const PRIMARY_KEY_COLUMN = 'lm';
+    
+    /**
      * Specify Model class name
      *
      * @return string
@@ -45,8 +51,46 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
         $this->pushCriteria(app(RequestCriteria::class));
     }
     
-    
+    /**
+     * Presentation
+     * Responsible for the default presentation layer of the repository
+     * @return type
+     */
     public function presenter() {
         return ProductPresenter::class;
     }
+    
+    /**
+     * This method only provides the convenient way to fetch an entity by a specified column
+     * 
+     * @param       $field
+     * @param       $search
+     * @return mixed | null
+     */
+    public function findCustomByField(string $field, $search ) {
+        try{
+            $temporarySkipPresenter = $this->skipPresenter;
+            $this->skipPresenter();
+            
+            $p = $this->scopeQuery(function ($query) use($field,$search){
+                return $query->select("products.*")
+                    ->where($field,'=',$search);
+            })->first();
+            
+            if(!is_null($p)){
+                $this->skipPresenter($temporarySkipPresenter);
+                return $this->parserResult($p);
+            }
+            
+            return null;
+            
+        } catch (\Exception $e){
+           return null;
+        }
+        
+        
+        
+    }
+    
+    
 }
