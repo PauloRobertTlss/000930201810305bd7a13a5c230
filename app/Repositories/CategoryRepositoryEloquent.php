@@ -46,6 +46,11 @@ class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepos
         $this->pushCriteria(app(RequestCriteria::class));
     }
     
+    /**
+     * Presentation
+     * Responsible for the default presentation layer of the repository
+     * @return type
+     */
      public function presenter() {
         return CategoryPresenter::class;
     }
