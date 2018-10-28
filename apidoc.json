@@ -1,0 +1,7 @@
+{
+  "name": "Leroy",
+  "version": "1.0.0",
+  "description": "Neste micro projeto é disponibilizado API para uma breve apresentação, temos a possibilizade de importação de planilhas (.xlsx;csv) para o registro de produtos com ou sem categoria.No ato da importação será disponibilizado um endpoint para situação e processamento do seu documento. Os interresados também poderam contar com API's auxiliares para listagem, edição e deleção de produtos. Demais API´s veremos como listar os documentos já processados ou na fila com seus status de sucesso ou falha no documento.",
+  "title": "Registro de produtos | Gestão de Produtos | Fila de Processamento",
+  "url" : "http://localhost/api/v1"
+}
