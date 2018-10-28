@@ -15,14 +15,34 @@ use Prettus\Repository\Traits\TransformableTrait;
 class Document extends Model implements Transformable
 {
     use TransformableTrait;
-
+    
+    /**
+     * Provided Worksheet Suggests that the primary key of the template is.
+     * 
+     */
+    const WEBHOOK_ENDPOINT_URL = 'api/webhook/processed';
     /**
      * The attributes that are mass assignable.
-     *
      * @var array
      */
     protected $fillable = ['id','name','path','file_display','hash_endpoing','processed','progress'];
+    protected $appends = ['url_endpoint'];
     
+    /**
+     * Provide a url to the document endpoint
+     * @return type
+     */
+    public function getUrlEndpointAttribute(){
+        return url($this::WEBHOOK_ENDPOINT_URL.'/'.$this->hash_endpoing);
+    }
+
+    /**
+     * States of Processed
+     * 0 -default
+     * 1 - Processed and Sucess
+     * 2 - Processed and Failed
+     * @return string
+     */
     public function getProgress(){
         
         switch ($this->progress) {
