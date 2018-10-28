@@ -8,7 +8,6 @@ use Leroy\Http\Controllers\Controller;
 use Leroy\Repositories\Interfaces\ProductRepository;
 use Leroy\Services\ProductService;
 use Leroy\Http\Requests\ProductImportExcel;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 /**
  * Class ProductsController.
@@ -18,48 +17,92 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 class ProductsController extends Controller
 {
     /**
-     *
-     * @var type 
+     * Repository Products
+     * 
+     * @var ProductRepository
      */
     private $repository;
+    
+    /**
+     * Service Layer for Business rules
+     * 
+     * @var ProductService
+     */
     private $services;
     
+    /**
+     * Dependency Injection  Laravel
+     * @param ProductRepository $repository
+     * @param ProductService $services
+     */
     public function __construct(ProductRepository $repository,ProductService $services)
     {
        $this->repository = $repository;
        $this->services = $services;
     }
     
+    /**
+     * Retrieve a lists Products,paginated.
+     * 
+     * @param  int limit The number of models to return for pagination.
+     * @param  int page The number current page.
+     * @return mixed
+     */
     public function index(Request $request){
         $limitTo = $request->query->get('limit',50);
         $this->repository->pushCriteria(app(RequestCriteria::class));
+        //including meta date of pagination
         return $this->repository->paginate($limitTo);
     }
     
+    /**
+     * Find Product by one values in one field
+     *
+     * @param  $id
+     * @return mixed
+     */
     public function show($id){
-        try{
-            return $this->repository->find($id);
-        }catch(ModelNotFoundException $e)
-        {
-            return response()->json(['status' => 'failed', 'data' => null, 'message' => 'Product not found'],404);
-        }
+       // Through the method we can verify that the product exists.
+       $p = $this->repository->findCustomByField($this->repository::PRIMARY_KEY_COLUMN,$id);
+       return !is_null($p) ? $p : response()->json(['status' => 'failed', 'data' => null, 'message' => 'Product not found'],404);
+
     }
     
+    /**
+     * Update a entity Product
+     * 
+     * @param Request $request
+     * @param type $id
+     * @return mixed
+     */
     public function update(Request $request,$id){
        $data = $request->all();
+       //Rules for upgrading the service layey
         return $this->services->update($data,$id);
     }
     
+     /**
+     * Delete a entity Product
+     * 
+     * @param Request $request
+     * @param type $id
+     * @return mixed
+     */
     public function destroy($id){
+        //Rules for Deleting the service layey
         return $this->services->delete($id);
     }
     
     /**
+     * Import File
      * 
+     * @param ProductImportExcel $request
+     * @return mixed
      */
     public function import(ProductImportExcel $request)
     {
         $data = $request->all();
+        //Rules for import file in service layey
         return $this->services->importExcel($data);
     }
     
