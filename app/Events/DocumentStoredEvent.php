@@ -10,13 +10,13 @@ class DocumentStoredEvent
     
     public function __construct(Document $document)
     {
-        $this->bank = $document;
+        $this->document = $document;
     }
 
     /**
      * @return Document
      */
-    public function getDocument()
+    public function getModel()
     {
         return $this->document;
     }
