@@ -2,8 +2,9 @@
 
 namespace Leroy\Providers;
 
-use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Leroy\Events\DocumentStoredEvent;
+use Leroy\Listeners\DocumentStoredListener;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -13,9 +14,9 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'Leroy\Events\Event' => [
-            'Leroy\Listeners\EventListener',
-        ],
+        DocumentStoredEvent::class =>[
+            DocumentStoredListener::class
+        ]
     ];
 
     /**
