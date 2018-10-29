@@ -26,18 +26,7 @@ class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepos
         return Category::class;
     }
 
-    /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
-    public function validator()
-    {
-
-        return CategoryValidator::class;
-    }
-
-
+    
     /**
      * Boot up the repository, pushing criteria
      */
