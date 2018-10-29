@@ -34,16 +34,6 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
     }
 
     /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
-    public function validator()
-    {
-        return ProductValidator::class;
-    }
-
-    /**
      * Boot up the repository, pushing criteria
      */
     public function boot()
@@ -68,7 +58,7 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
      * @return mixed | null
      */
     public function findCustomByField(string $field, $search ) {
-        try{
+            
             $temporarySkipPresenter = $this->skipPresenter;
             $this->skipPresenter();
             
@@ -77,18 +67,17 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
                     ->where($field,'=',$search);
             })->first();
             
+            $this->skipPresenter($temporarySkipPresenter); 
             if(!is_null($p)){
-                $this->skipPresenter($temporarySkipPresenter);
-                return $this->parserResult($p);
+                $this->applyScope();
+                $model = $this->model->findOrFail($p->id);
+                $this->resetModel();
+                return $this->parserResult($model);
+                
             }
             
             return null;
-            
-        } catch (\Exception $e){
-           return null;
-        }
-        
-        
+    
         
     }
     
