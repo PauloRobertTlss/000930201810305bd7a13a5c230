@@ -69,7 +69,7 @@ class ProductService
      * @param int $id
      * @return type
      */
-    public function update(array $data,int $id){
+    public function update(array $data, $id){
         
         //exit update due to lack of attributes
         if(!count($data)){
@@ -84,7 +84,7 @@ class ProductService
         
         try{
           //validation of required fields
-          $this->productValidator->with($data)->passesOrFail(ProductValidator::RULE_UPDATE);
+          //$this->productValidator->with($data)->passesOrFail(ProductValidator::RULE_UPDATE);
             //check existing category
            if(isset($data['category_id'])){
                   $category = $this->categoryRepository->findByField('id',$data['category_id'])->first();
@@ -95,7 +95,8 @@ class ProductService
               //check 
               $data['price'] = str_replace(',','.', $data['price']);
            }
-
+           
+           //dd($data);
            $this->productRepository->update($data, $p->id);
            return response()->json(['status' => 'success', 'message' => 'Product updated'],200);
         }
