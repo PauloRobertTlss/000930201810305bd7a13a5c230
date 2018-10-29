@@ -218,14 +218,8 @@ class ProductTest extends TestCase
             *        "status": "failed",
             *        "error": true,
             *        "message": {
-            *            "lm": [
-            *                "O código único lm* é obrigatório"
-            *            ],
             *            "name": [
             *                "O name é obrigatório"
-            *            ],
-            *            "price": [
-            *                "O preço é obrigatório"
             *            ]
             *        }
             *    }
