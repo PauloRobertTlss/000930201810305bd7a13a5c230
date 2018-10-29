@@ -9,7 +9,7 @@
         * @apiGroup Deletar
             * @apiVersion 0.1.0
             * @apiDescription Remover Produto
-            * @apiParam (Paramentros) {Number} lm* Código Único.
+            * @apiParam (Parametros) {Number} lm* Código Único.
             * @apiSuccessExample {json} Sucesso:
             *     HTTP/1.1 204 No Content
             *    
@@ -133,11 +133,11 @@
             * @apiGroup Editar
             * @apiVersion 0.1.0
             * @apiDescription Atualização do Produto
-            * @apiParam (Paramentros) {Number} lm <code>obrigatório</code> Informe um número.
-            * @apiParam (Paramentros) {String} name Name do produto.
-            * @apiParam (Paramentros) {String} description Descrição e detalhes do produto.
-            * @apiParam (Paramentros) {Number} free_shipping Frete Grátis.
-            * @apiParam (Paramentros) {Number} price Preço do Produto.
+            * @apiParam (Parametros) {Number} lm <code>obrigatório</code> Informe um número.
+            * @apiParam (Parametros) {String} name Name do produto.
+            * @apiParam (Parametros) {String} description Descrição e detalhes do produto.
+            * @apiParam (Parametros) {Number} free_shipping Frete Grátis.
+            * @apiParam (Parametros) {Number} price Preço do Produto.
             * @apiSuccessExample {json} Sucesso:
             *     HTTP/1.1 200 OK
             *    {
