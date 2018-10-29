@@ -13,6 +13,8 @@
     "cross-env": "^5.0.1",
     "gulp": "^3.9.1",
     "gulp-api-doc": "^2.2.0",
+    "gulp-build-html": "^1.0.12",
+    "gulp-htmltidy": "^0.2.4",
     "laravel-elixir": "^6.0.0-18",
     "laravel-elixir-apidoc": "^0.1.0",
     "laravel-mix": "^1.0",
