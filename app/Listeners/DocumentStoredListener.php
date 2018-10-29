@@ -3,21 +3,11 @@
 namespace Leroy\Listeners;
 
 use Leroy\Events\DocumentStoredEvent;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use Leroy\Jobs\RegisterProductsInBackgroud;
 
 class DocumentStoredListener
 {
-    /**
-     * Create the event listener.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
-
+  
     /**
      * Handle the event.
      *
@@ -26,6 +16,10 @@ class DocumentStoredListener
      */
     public function handle(DocumentStoredEvent $event)
     {
-        //
+        $model = $event->getModel(); //model em questão
+        \Log::info("iniciando fila");
+         $job = (new RegisterProductsInBackgroud($model));
+         dispatch($job);
+        
     }
 }
