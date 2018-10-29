@@ -3,6 +3,8 @@
 namespace Leroy\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Leroy\Entities\Document;
+use ChatPool\Observers\DocumentObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Document::observe(DocumentObserver::class); //gerar custom_uid
     }
 
     /**
