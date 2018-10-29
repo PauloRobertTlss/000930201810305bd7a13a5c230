@@ -36,6 +36,6 @@ $factory->define(Leroy\Entities\Product::class, function (Faker\Generator $faker
         'lm' => $faker->numberBetween(1000,10000),
         'description' => $faker->sentence(10),
         'free_shipping' => 0,
-        'price' => number_format($faker->numberBetween(10,1000), 2)
+        'price' => $faker->randomNumber(2)
     ];
 });
