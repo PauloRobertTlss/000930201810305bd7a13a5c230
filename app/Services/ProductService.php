@@ -84,7 +84,7 @@ class ProductService
         
         try{
           //validation of required fields
-          //$this->productValidator->with($data)->passesOrFail(ProductValidator::RULE_UPDATE);
+          $this->productValidator->with($data)->passesOrFail(ProductValidator::RULE_UPDATE);
             //check existing category
            if(isset($data['category_id'])){
                   $category = $this->categoryRepository->findByField('id',$data['category_id'])->first();
@@ -96,9 +96,8 @@ class ProductService
               $data['price'] = str_replace(',','.', $data['price']);
            }
            
-           //dd($data);
-           $this->productRepository->update($data, $p->id);
-           return response()->json(['status' => 'success', 'message' => 'Product updated'],200);
+           $p = $this->productRepository->skipPresenter(false)->update($data, $p->id);
+           return response()->json(['status' => 'success','data'=>$p,'message' => 'Product updated'],200);
         }
         catch (ValidatorException $e){
             $data = ['status' => 'failed','error' => true,'message' => $e->getMessageBag()];
