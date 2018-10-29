@@ -33,6 +33,7 @@ class ProductValidator extends LaravelValidator
             'description'=> 'required'
         ],
         ValidatorInterface::RULE_UPDATE => [
+            'name' => 'required'
         ],
     ];
 }
