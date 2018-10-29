@@ -22,3 +22,20 @@ $factory->define(Leroy\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(Leroy\Entities\Category::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+        'description' => $faker->sentence(10)
+    ];
+});
+$factory->define(Leroy\Entities\Product::class, function (Faker\Generator $faker) {
+    return [
+        'category_id' => null,
+        'name' => $faker->name,
+        'lm' => $faker->numberBetween(1000,10000),
+        'description' => $faker->sentence(10),
+        'free_shipping' => 0,
+        'price' => number_format($faker->numberBetween(10,1000), 2)
+    ];
+});
