@@ -138,7 +138,6 @@ trait Importable
                 }
                 
                 $row = $callback ? $callback(array_combine($headers, $row)) : array_combine($headers, $row);
-                
                 $collection[] = is_numeric($header_master[1]) ? array_prepend($row,$header_master[1],'category_id') : array_prepend($row,null,'category_id');
             }
         } else {
