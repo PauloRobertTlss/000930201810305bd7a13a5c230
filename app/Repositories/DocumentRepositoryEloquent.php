@@ -7,7 +7,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use Leroy\Repositories\Interfaces\DocumentRepository;
 use Leroy\Entities\Document;
 use Leroy\Presenters\DocumentPresenter;
-
+use Leroy\Events\DocumentStoredEvent;
 /**
  * Class DocumentRepositoryEloquent.
  *
@@ -41,6 +41,19 @@ class DocumentRepositoryEloquent extends BaseRepository implements DocumentRepos
      */
     public function presenter() {
         return DocumentPresenter::class;
+    }
+    
+    public function create(array $attributes)
+    {
+
+        $skipPresenter = $this->skipPresenter;
+        $this->skipPresenter(true);
+        $model =  parent::create($attributes);
+        //New Queues
+        event(new DocumentStoredEvent($model));
+        $this->skipPresenter = $skipPresenter;
+        return $this->parserResult($model);
+
     }
     
 }
