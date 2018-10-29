@@ -8,9 +8,7 @@ use Box\Spout\Writer\CSV\Writer as CSVWriter;
 use Illuminate\Support\Collection;
 
 /**
- * Description of Bot
- *
- * @author Paulo
+ * This Class only provides a convenient way to generate a file and returns a Collection
  */
 class Bot {
     
