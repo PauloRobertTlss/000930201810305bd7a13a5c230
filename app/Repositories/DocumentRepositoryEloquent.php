@@ -48,12 +48,18 @@ class DocumentRepositoryEloquent extends BaseRepository implements DocumentRepos
 
         $skipPresenter = $this->skipPresenter;
         $this->skipPresenter(true);
+        
+        $attributes = array_prepend($attributes,$this->hashGenerate(),'hash_endpoing');
         $model =  parent::create($attributes);
         //New Queues
         event(new DocumentStoredEvent($model));
         $this->skipPresenter = $skipPresenter;
         return $this->parserResult($model);
 
+    }
+    
+    private function hashGenerate(){
+        return bin2hex(openssl_random_pseudo_bytes(8)).".".uniqid(date('HisYmd'));
     }
     
 }
