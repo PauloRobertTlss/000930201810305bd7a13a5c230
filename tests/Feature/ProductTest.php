@@ -3,12 +3,8 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Http\File;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 
 class ProductTest extends TestCase
 {
@@ -18,7 +14,7 @@ class ProductTest extends TestCase
  * @api {get} /products
  * @apiName /products/
             * @apiExample {curl} Examplo de uso:
-            * curl -i --header "Content-Type: application/json;Accept:application/json" --request GET http://localhost:8000/api/v1/products?limit=50&page=2
+            * curl -i --header "Content-Type: application/json;Accept:application/json" --request GET http://api.tlss-cloud.com.br/api/v1/products?limit=50&page=2
             * @apiGroup Produtos
             * @apiVersion 0.1.0
             * @apiDescription Listagem de Produtos.
@@ -47,8 +43,8 @@ class ProductTest extends TestCase
              *           "current_page": 10,
              *           "total_pages": 192,
              *           "links": {
-             *               "previous": "http://localhost:8000:8000/api/v1/products?limit=3&page=9",
-             *               "next": "http://localhost:8000:8000/api/v1/products?limit=3&page=11"
+             *               "previous": "http://api.tlss-cloud.com.br:8000/api/v1/products?limit=3&page=9",
+             *               "next": "http://api.tlss-cloud.com.br:8000/api/v1/products?limit=3&page=11"
              *           }
              *       }
              *   }
@@ -66,7 +62,7 @@ class ProductTest extends TestCase
  * @api {get} /products/:lm
  * @apiName /products/:lm
             * @apiExample {curl} Examplo de uso:
-            * curl -i --header "Content-Type: application/json;Accept:application/json" --request GET http://localhost:8000/api/v1/products/30
+            * curl -i --header "Content-Type: application/json;Accept:application/json" --request GET http://api.tlss-cloud.com.br/api/v1/products/30
             * @apiGroup Detalhes
             * @apiVersion 0.1.0
             * @apiDescription Detalhes do Produto com Categoria
@@ -113,7 +109,7 @@ class ProductTest extends TestCase
  * @api {get} /products/:lm
  * @apiName /products/:lm
             * @apiExample {curl} Examplo de uso:
-            * curl -i --header "Content-Type: application/json;Accept:application/json" --request GET http://localhost:8000/api/v1/products/30
+            * curl -i --header "Content-Type: application/json;Accept:application/json" --request GET http://api.tlss-cloud.com.br/api/v1/products/30
             * @apiGroup Detalhes
             * @apiVersion 0.1.0
             * @apiDescription Detalhes do Produto com Categoria
@@ -192,7 +188,7 @@ class ProductTest extends TestCase
  * @api {put} /products/:lm
  * @apiName /products/:lm
             * @apiExample {curl} Examplo de uso:
-            * curl -i --header "Content-Type: application/json;Accept:application/json" --request PUT http://localhost:8000/api/v1/products/30 -d '{
+            * curl -i --header "Content-Type: application/json;Accept:application/json" --request PUT http://api.tlss-cloud.com.br/api/v1/products/30 -d '{
              *           "lm": 1020,
              *           "name": "Luvas de Proteção",
              *           "description": "Luva de proteção básica",
@@ -285,7 +281,7 @@ class ProductTest extends TestCase
 * @api {delete} /products/:lm
 * @apiName /products/:lm
 * @apiExample {curl} Examplo de uso:
-* curl -i --header "Content-Type: application/json;Accept:application/json;Origin:http://localhost:8000" --request DELETE http://localhost:8000/api/v1/products/30
+* curl -i --header "Content-Type: application/json;Accept:application/json;Origin:http://api.tlss-cloud.com.br" --request DELETE http://api.tlss-cloud.com.br/api/v1/products/30
 * @apiGroup Deletar
 * @apiVersion 0.1.0
             * @apiDescription Remover Produto
@@ -315,7 +311,7 @@ class ProductTest extends TestCase
  * @api {post} /products/import
  * @apiName /products/import
             * @apiExample {curl} Examplo de uso:
-            * curl --header "Accept:application/json" --request POST http://localhost:8000/api/v1/products/import -F 'file=@path/to/file.xlsx''
+            * curl --header "Accept:application/json" --request POST http://api.tlss-cloud.com.br/api/v1/products/import -F 'file=@path/to/file.xlsx''
             * @apiGroup Import do Excel
             * @apiVersion 0.1.0
             * @apiDescription O registro de novos produtos além da atualização pode acontecer atraves de planilhas. <strong style="font-size:1.3rem;color:blue;">faça o download do modelo</strong>.
@@ -326,7 +322,7 @@ class ProductTest extends TestCase
             *   "data": 
             *       {
             *           "message": "document dispatch",
-            *           "endpoint": "http://localhost:8000:8000/api/webhook/processed/41417e683bcfcf05.xlsx.153ebbfa98a92f85"
+            *           "endpoint": "http://api.tlss-cloud.com.br:8000/api/webhook/processed/41417e683bcfcf05.xlsx.153ebbfa98a92f85"
             *        }
             * @apiErrorExample {json} Campo Obrigatório:
             *     HTTP/1.1 422 Unprocessable Entity
