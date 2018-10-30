@@ -19,7 +19,7 @@ O Projeto tem o propósito de apresentação, não foi criada uma camada de aute
 
 ## JSON RESPONSE
 
-As APIs por padrão usam o formato JSON em suas resposta. Todas as respostas serão interceptadas pela camada de apresentação [Model–view–presenter (MVP)](https://pt.wikipedia.org/wiki/Model-view-presenter)
+As APIs por padrão usam o formato JSON em suas respostas. Todas as respostas serão interceptadas pela camada de apresentação [Model–view–presenter (MVP)](https://pt.wikipedia.org/wiki/Model-view-presenter)
 
 ## API DE PRODUTO
 
