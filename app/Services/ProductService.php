@@ -145,13 +145,10 @@ class ProductService
             //full path of document
             $tmpFile = sys_get_temp_dir().DIRECTORY_SEPARATOR.$file_name_temp;
             
-            //the endpoint will be returned with the only generated
-            $hashEndPoint = bin2hex(openssl_random_pseudo_bytes(8)).".".$file->getClientOriginalExtension().".".uniqid(date('HisYmd'));
             //Save a new entity Document
             //The product registration will be triggered in the create method
-            $document = $this->documentRepository->skipPresenter()->create(['name'=>$file_name_temp,'path'=>$tmpFile,'file_display'=>$file->getClientOriginalName(),'hash_endpoing'=>$hashEndPoint]);
+            $document = $this->documentRepository->skipPresenter()->create(['name'=>$file_name_temp,'path'=>$tmpFile,'file_display'=>$file->getClientOriginalName()]);
             
-            unset($hashEndPoint);
             unset($file);
          return response()->json(['message'=>'document dispatch','endpoint' => $document->url_endpoint],200);
         }
