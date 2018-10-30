@@ -13,7 +13,9 @@ class DocumentObserver
     }
     public function creating(Document $document)
     {
-        //pre-processamento
+        //pre-processamento com Eloquent
+        $document->hash_endpoing = bin2hex(openssl_random_pseudo_bytes(8)).".".uniqid(date('HisYmd'));
+        \Log::info("creating Document $hashEndPoint");
     }
     
     public function deleting(Document $document)
