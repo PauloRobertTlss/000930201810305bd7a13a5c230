@@ -5,6 +5,7 @@ namespace Leroy\Providers;
 use Illuminate\Support\ServiceProvider;
 use Leroy\Entities\Document;
 use ChatPool\Observers\DocumentObserver;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,6 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Schema::defaultStringLength(191);
         Document::observe(DocumentObserver::class); //gerar custom_uid
     }
 
