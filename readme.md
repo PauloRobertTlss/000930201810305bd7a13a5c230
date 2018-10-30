@@ -6,7 +6,12 @@
 
 ## Sobre o Projeto
 
-O Projeto disponibiliza uma maneira conveniente de cadastro e atualização de Produtos através de Planilhas (.xlsx),[baixe aqui o modelo](https://s3.us-east-2.amazonaws.com/eaadk4yfoubad0tmoq3cert/certificados/products_teste_webdev_leroy.xlsx), e fornecer um endpoint para acompanhar o status de sua planilha. Após o upload do arquivo será verificado a integridade do seu documento, caso a validação seja confirmada sua planilha entrara na fila de processamento e receba um novo status após esse processo.
+O Projeto disponibiliza uma maneira conveniente de cadastro e atualização de Produtos através de Planilhas (.xlsx), além de fornecer um endpoint para acompanhar o status de sua planilha. Após o upload do arquivo será verificado a integridade do seu documento, caso a validação seja confirmada sua planilha entrara na fila de processamento e receba um novo status após esse processo.
+
+
+## LAYOUT DA PLANILHA - CASO DE USO
+
+O modelo do documento para importação. [planilha modelo](https://s3.us-east-2.amazonaws.com/eaadk4yfoubad0tmoq3cert/certificados/products_teste_webdev_leroy.xlsx),
 
 ## AUTENTICAÇÃO
 
@@ -16,25 +21,35 @@ O Projeto tem o propósito de apresentação, não foi criada uma camada de aute
 
 As APIs por padrão usam o formato JSON em suas resposta. Todas as respostas serão interceptadas pela camada de apresentação [Model–view–presenter (MVP)](https://pt.wikipedia.org/wiki/Model-view-presenter)
 
-## DOCUMENTAÇÃO 
+## API DE PRODUTO
 
-Documentação completa. [visualizar](https://s3.us-east-2.amazonaws.com/eaadk4yfoubad0tmoq3cert/certificados/products_teste_webdev_leroy.xlsx)
+| API                     | Verbo  |  Geral                                     |
+|-------------------------|:------:|-------------------------------------------:|
+| /api/v1/products        |  GET   | Lista de produtos                          |
+| /api/v1/products/{lm}   |  GET   | Detalhes do Produto                        |
+| /api/v1/products/{lm}   |  PUT   | Atualização de Produto                     |
+| /api/v1/products/{lm}   |  DELETE| Remover Produto                            |
+| /api/v1/products/import |  POST  | Cadastrar, Atualizar Produtos com Planilha |
 
-## LISTA DE API
+## API DE ENDPOINT
 
-1. Ist Item  
-First item with having index value 1
-1. 2nd Item  
-Second item having index value 2, beside we gave it 1, which indicates that markdown parser does not break the list.
-1. **3rd Item:**  
-&nbsp;&nbsp;&nbsp;&nbsp;If you want to do something fancy with your list
+| API                           | Verbo  |  Geral                                     |
+|-------------------------------|:------:|-------------------------------------------:|
+| /api/webhook/processed/{hash} |  GET   | Verificar status de um documento           |
+| /api/webhook/inProgress       |  GET   | listagem de documentos em fila             |
+| /api/webhook/processed        |  GET   | listagem de documentos já processdos       |
 
 ```php
-public function test() {
-  
-}
+php artisan route:list
 ```
-## LISTA DE TESTES
+
+![Rotas](https://s3.us-east-2.amazonaws.com/eaadk4yfoubad0tmoq3cert/certificados/rotas_leroy.png)
+
+## DOCUMENTAÇÃO API
+
+Documentação completa. [visualizar](http://doc.tlss-cloud.com.br/)
+
+## LISTA DE TESTES - TDD
 
 ```php
 public function testAPiList(){
@@ -73,9 +88,6 @@ public function testAPiImportExcel(){
 public function testAPiImportTestWithImage(){
 //Upload de imagen. response HTTP/1.1 422
 }
-
-
-
 
 
 ```

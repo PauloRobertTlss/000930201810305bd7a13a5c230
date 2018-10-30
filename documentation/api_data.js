@@ -7,7 +7,7 @@ define({ "api": [
     "examples": [
       {
         "title": "Examplo de uso:",
-        "content": "curl -i --header \"Content-Type: application/json;Accept:application/json;Origin:http://www.tlss-cloud.com.br\" --request DELETE http://www.tlss-cloud.com.br/api/v1/products/30",
+        "content": "curl -i --header \"Content-Type: application/json;Accept:application/json;Origin:http://api.tlss-cloud.com.br\" --request DELETE http://api.tlss-cloud.com.br/api/v1/products/30",
         "type": "curl"
       }
     ],
@@ -56,7 +56,7 @@ define({ "api": [
     "examples": [
       {
         "title": "Examplo de uso:",
-        "content": "curl -i --header \"Content-Type: application/json;Accept:application/json\" --request GET http://www.tlss-cloud.com.br/api/v1/products/30",
+        "content": "curl -i --header \"Content-Type: application/json;Accept:application/json\" --request GET http://api.tlss-cloud.com.br/api/v1/products/30",
         "type": "curl"
       }
     ],
@@ -105,7 +105,7 @@ define({ "api": [
     "examples": [
       {
         "title": "Examplo de uso:",
-        "content": "curl -i --header \"Content-Type: application/json;Accept:application/json\" --request GET http://www.tlss-cloud.com.br/api/v1/products/30",
+        "content": "curl -i --header \"Content-Type: application/json;Accept:application/json\" --request GET http://api.tlss-cloud.com.br/api/v1/products/30",
         "type": "curl"
       }
     ],
@@ -154,7 +154,7 @@ define({ "api": [
     "examples": [
       {
         "title": "Examplo de uso:",
-        "content": "curl -i --header \"Content-Type: application/json;Accept:application/json\" --request PUT http://www.tlss-cloud.com.br/api/v1/products/30 -d '{\n          \"lm\": 1020,\n          \"name\": \"Luvas de Proteção\",\n          \"description\": \"Luva de proteção básica\",\n          \"free_shipping\": 1,\n          \"price\": \"5.61\",\n          \"created_at\": \"2018-10-26\"\n      }'",
+        "content": "curl -i --header \"Content-Type: application/json;Accept:application/json\" --request PUT http://api.tlss-cloud.com.br/api/v1/products/30 -d '{\n          \"lm\": 1020,\n          \"name\": \"Luvas de Proteção\",\n          \"description\": \"Luva de proteção básica\",\n          \"free_shipping\": 1,\n          \"price\": \"5.61\",\n          \"created_at\": \"2018-10-26\"\n      }'",
         "type": "curl"
       }
     ],
@@ -208,7 +208,7 @@ define({ "api": [
     "examples": [
       {
         "title": "Examplo de uso:",
-        "content": "curl --header \"Accept:application/json\" --request POST http://www.tlss-cloud.com.br/api/v1/products/import -F 'file=@path/to/file.xlsx''",
+        "content": "curl --header \"Accept:application/json\" --request POST http://api.tlss-cloud.com.br/api/v1/products/import -F 'file=@path/to/file.xlsx''",
         "type": "curl"
       }
     ],
@@ -232,7 +232,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Sucesso:",
-          "content": "  HTTP/1.1 200 OK\n {\n\"data\": \n    {\n        \"message\": \"document dispatch\",\n        \"endpoint\": \"http://www.tlss-cloud.com.br:8000/api/webhook/processed/41417e683bcfcf05.xlsx.153ebbfa98a92f85\"\n     }",
+          "content": "  HTTP/1.1 200 OK\n {\n\"data\": \n    {\n        \"message\": \"document dispatch\",\n        \"endpoint\": \"http://api.tlss-cloud.com.br:8000/api/webhook/processed/41417e683bcfcf05.xlsx.153ebbfa98a92f85\"\n     }",
           "type": "json"
         }
       ]
@@ -257,7 +257,7 @@ define({ "api": [
     "examples": [
       {
         "title": "Examplo de uso:",
-        "content": "curl -i --header \"Content-Type: application/json;Accept:application/json\" --request GET http://www.tlss-cloud.com.br/api/v1/products?limit=50&page=2",
+        "content": "curl -i --header \"Content-Type: application/json;Accept:application/json\" --request GET http://api.tlss-cloud.com.br/api/v1/products?limit=50&page=2",
         "type": "curl"
       }
     ],
@@ -288,7 +288,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Sucesso:",
-          "content": "  HTTP/1.1 200 OK\n {\n\"data\": [\n    {\n        \"id\": 28,\n        \"lm\": 1003,\n        \"name\": \"Luvas de Proteção\",\n        \"description\": \"Luva de proteção básica\",\n        \"free_shipping\": 1,\n        \"price\": \"5.61\",\n        \"price_display\": \"R$ 5.61\",\n        \"created_at\": \"2018-10-26\"\n    }\n],\n\"meta\": {\n    \"pagination\": {\n        \"total\": 576,\n        \"count\": 3,\n        \"per_page\": 3,\n        \"current_page\": 10,\n        \"total_pages\": 192,\n        \"links\": {\n            \"previous\": \"http://www.tlss-cloud.com.br:8000/api/v1/products?limit=3&page=9\",\n            \"next\": \"http://www.tlss-cloud.com.br:8000/api/v1/products?limit=3&page=11\"\n        }\n    }\n}\n}",
+          "content": "  HTTP/1.1 200 OK\n {\n\"data\": [\n    {\n        \"id\": 28,\n        \"lm\": 1003,\n        \"name\": \"Luvas de Proteção\",\n        \"description\": \"Luva de proteção básica\",\n        \"free_shipping\": 1,\n        \"price\": \"5.61\",\n        \"price_display\": \"R$ 5.61\",\n        \"created_at\": \"2018-10-26\"\n    }\n],\n\"meta\": {\n    \"pagination\": {\n        \"total\": 576,\n        \"count\": 3,\n        \"per_page\": 3,\n        \"current_page\": 10,\n        \"total_pages\": 192,\n        \"links\": {\n            \"previous\": \"http://api.tlss-cloud.com.br:8000/api/v1/products?limit=3&page=9\",\n            \"next\": \"http://api.tlss-cloud.com.br:8000/api/v1/products?limit=3&page=11\"\n        }\n    }\n}\n}",
           "type": "json"
         }
       ]
