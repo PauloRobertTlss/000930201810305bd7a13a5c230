@@ -21,6 +21,8 @@ O Projeto tem o propósito de apresentação, não foi criada uma camada de aute
 
 As APIs por padrão usam o formato JSON em suas respostas. Todas as respostas serão interceptadas pela camada de apresentação [Model–view–presenter (MVP)](https://pt.wikipedia.org/wiki/Model-view-presenter)
 
+
+
 ## API DE PRODUTO
 
 | API                     | Verbo  |  Geral                                     |
@@ -48,6 +50,27 @@ php artisan route:list
 ## DOCUMENTAÇÃO API
 
 Documentação completa. [visualizar](http://doc.tlss-cloud.com.br/)
+
+## CORS - Not allowed in CORS policy.
+ 
+ - Postman: Headers adicione Origin:
+
+![Origin](https://s3.us-east-2.amazonaws.com/eaadk4yfoubad0tmoq3cert/certificados/headers.png)
+
+ - Para sua hostedagem o arquivo config\cors.php
+    ```php
+        return [   
+        'supportsCredentials' => false,
+        'allowedOrigins' => ['http://127.0.0.1:8000',
+                         'ADICIONE AQUI'
+                        ],
+            'allowedOriginsPatterns' => [],
+            'allowedHeaders' => ['*'],
+            'allowedMethods' => ['*'],
+            'exposedHeaders' => [],
+            'maxAge' => 0
+        ];
+   ```
 
 ## LISTA DE TESTES - TDD
 
