@@ -49,7 +49,7 @@ php artisan route:list
 
 ## DOCUMENTAÇÃO API
 
-Documentação completa. [visualizar](http://doc.tlss-cloud.com.br/)
+Documentação completa. /*[visualizar](http://doc.tlss-cloud.com.br/)*/
 
 ## CORS - Not allowed in CORS policy.
  
@@ -57,7 +57,7 @@ Documentação completa. [visualizar](http://doc.tlss-cloud.com.br/)
 
 ![Origin](https://s3.us-east-2.amazonaws.com/eaadk4yfoubad0tmoq3cert/certificados/headers.png)
 
- - Para sua hostedagem o arquivo config\cors.php
+ - Na sua hospedagem edite o arquivo config\cors.php
     ```php
         return [   
         'supportsCredentials' => false,
