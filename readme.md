@@ -47,9 +47,6 @@ php artisan route:list
 
 ![Rotas](https://s3.us-east-2.amazonaws.com/eaadk4yfoubad0tmoq3cert/certificados/rotas_leroy.png)
 
-## DOCUMENTAÇÃO API
-
-Documentação completa. /*[visualizar](http://doc.tlss-cloud.com.br/)*/
 
 ## CORS - Not allowed in CORS policy.
  
